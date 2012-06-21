@@ -1,13 +1,17 @@
-<?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
-<!--writen in markdown syntax-->
-
-<h1>'gitflow' flow</h1>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>tadas on pagodabox release v0.1.2</title>
+  <meta name="description" content="tadas on pagoda box">
+  <meta name="author" content="tadas">
+<!--  <link rel="stylesheet" href="css/styles.css?v=1.0">-->
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+    <h1>'gitflow' flow</h1>
 
 <h2>Links</h2>
 
@@ -49,3 +53,7 @@
 ...will merge back <em>FIXNAME</em> branch with <em>develop</em> and <em>master</em> branch <br />
 ...will mark merge with release TAG </p>
 
+
+<!--  <script src="js/scripts.js"></script>-->
+</body>
+</html>
