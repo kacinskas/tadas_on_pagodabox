@@ -1,0 +1,128 @@
+{
+ "title":"Welcome to TextPress",
+ "date" : "07-02-2012",
+ "slug" : "welcome-to-textpress",
+ "author" : "Admin",
+ "tag" : "intro"
+}
+
+TextPress is a simple, light weight blogging engine for PHP geeks, which can be hosted in PHP clouds like PHP Fog, Pagodabox, Orchestra.io, etc (though you can use traditional hosting to host TextPress, it is less preferred). It is inspired from [toto](http://cloudhead.io/toto), a flat-file blog engine in Ruby. TextPress is built on top of [Slim](http://www.slimframework.com/), a light weight php framework. It uses Git, the most popular version control system, for publishing articles. Articles can be written in markdown or html syntax. 
+
+##Features
+
+* Simple, easy to use 
+* Publish article using git => Content versioning Yaay!
+* Highly secure (as secure as your hosting platform)
+* Blazing fast
+* Write articles in text file, with metadata in json format.
+* Easy integration with disqus commenting system.
+
+##Requirements
+
+* You should have Git installed, if using Git for publishing articles.
+* You should not hate using commands
+* Knowledge or willingness to learn HTML/Markdown
+* Account in any PHP PaaS like PHP Fog, Pagodabox, etc.
+
+##Get started
+
+Clone TextPress from Github 
+~~~
+shameer@ubuntu:~$ git clone git@github.com:shameerc/TextPress.git
+~~~
+
+##Filesystem
+
+<img src="/assets/images/filesystem.jpg" />
+#Configuration
+
+Config file located in config directory returns an array of site configuration which consists of site settings and routes. Site settings includes
+~~~
+'date.format' => 'd M, Y',   // Date format to be used in article page (not for routes)   
+'author.name' => 'Author name', // Global author name 
+'site.name'  => 'TextPress',   // Site name (Global)
+'site.title' => 'PHP Flat-file blog engine',  // Site default title (Global)
+'article.path'=> './articles',      // Path to articles
+'templates.path' => './templates',  // Path to templates
+'layout.file' => 'layout',    // Site layout file
+'file.extension' => '.txt',   // file extension of articles
+'disqus.username' => 'textpress',   // Your disqus username or false (Global)
+'markdown'		=> true, //Enable of disable markdown parsing. 
+'path.directory'  => '',
+'prefix' => '',   // prefix to be added with all URLs. eg : '/blog'
+'google.analytics' => false, // Google analytics code. set false to disable
+~~~
+
+###Routes
+TextPress defines all routes as an array. Each route should have a url pattern and a template file. You can write route conditions optionally. For a particular route, layout can be setting <code>layout => false</code>. TextPress comes with the following default routes. 
+~~~
+// Site root
+'__root__'=> array(
+		'route' => '/',
+		'template'=>'index',
+		'layout' => true
+	),
+'article' => array(
+		'route' => '/:year/:month/:date/:article',
+		'template'=>'article',
+		'conditions' => array(
+							 'year' => '(19|20)\d\d'
+							,'month'=>'([1-9]|[01][0-9])'
+							,'date'=>'([1-9]|[0-3][0-9])'
+							)
+	),
+'archives' => array(
+		'route' => '/archives(/:year(/:month(/:date)))',
+		'template' => 'archives',
+		'conditions' => array(
+							'year' => '(19|20)\d\d',
+							'month'=>'([1-9]|[01][0-2])'
+							)
+	),
+'about' => array(
+		'route' => '/about',
+		'template' => 'about',
+		'layout' => false
+	),
+'rss' => array(
+		'route' => '/feed/rss(.xml)',
+		'template' => 'rss',
+		'layout' => false,
+	),
+'atom' => array(	
+		'route' => '/feed(/atom(.xml))',
+		'template' => 'atom',
+		'layout' => false,
+	)
+~~~
+Right now the routes to article and archives are fixed. I will be adding the ability to have custom route in coming version.
+
+###Writing posts
+All posts need to be stored in <code>article.path</code>. _articles_ is the default location for posts. To write a new post, create a text file with name in the format <code>yyyy-mm-dd-article-slug.txt</code>. URL to this article will be <code>/yyyy/mm/dd/article-slug/</code>. An article will have a meta part and a content part which must be separated with a blank line. Article must start with the meta informations stored in json format. "title" and "date" are the mandatory meta information. Inside meta, You can specify "article-slug" which is not necessary. If slug is not present, TextPress will take the title to create slug. For example, metadata of this artilce will look like this.
+~~~
+{
+ "title":"Welcome to TextPress",
+ "date" : "07-02-2012",
+ "slug" : "welcome-to-textpress",
+ "author" : "Admin",
+ "tag" : "intro"
+}
+~~~
+You can write articles in markdown, html or mix of both formats. Artilces will be passed to Markdown parser for generating corresponding html. If you are not using markdown, it can be disabled globally by setting <code>markdown => false</code> in config file.
+
+##Customization
+Right now it may not be befitting to your requirements. So don't be afraid to fork and customize TextPress. Just take the code, do what ever you want :)
+
+##Thanks
+[Slim Framework](http://www.slimframework.com/)
+
+[PHP Markdown extra](http://michelf.com/projects/php-markdown/extra/)
+
+[Twitter Bootstrap](http://twitter.github.com/bootstrap/)
+
+[PHP Fog](http://phpfog.com) For their awesome platform which allowed me to host this site for free .
+
+##Issues
+If you find any issues feel free to report it [here](https://github.com/shameerc/TextPress/issues).
+
+#Happy Blogging
