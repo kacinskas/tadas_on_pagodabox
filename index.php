@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>tadas on pagodabox</title>
+  <title>tadas on pagodabox release v0.1.2</title>
   <meta name="description" content="tadas on pagoda box">
   <meta name="author" content="tadas">
 <!--  <link rel="stylesheet" href="css/styles.css?v=1.0">-->
